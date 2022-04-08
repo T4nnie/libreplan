@@ -48,12 +48,22 @@ public class GRE {
     }
 
     @Test
-    public void CAL_01(){
+    public void GRE_02(){
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
-        assert(pa.aCout());
+        PageAccueil pa = pl.seConnecter(driver, "log", "mdp");
+        assert(pa.aCalendrier());
+        PageMachines pm = pa.selectionnerRessources_Machines(driver);
+        assert(pm.isMe());
+        PageMachineCreation pmc = pm.clickCreer(driver);
 
-        
+    }
 
+    @Test
+    public void GRE_01(){
+        PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
+        PageAccueil pa = pl.seConnecter(driver, "log", "mdp");
+        assert(pa.aCalendrier());
+        PageParticipants pp = pa.selectionnerRessources_Participants(driver);
     }
 
 
