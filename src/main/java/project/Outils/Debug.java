@@ -1,5 +1,7 @@
 package project.Outils;
 
+import org.openqa.selenium.WebDriver;
+
 /*
 * Class comprenant les outils pour debug
 */
@@ -17,6 +19,10 @@ public class Debug {
         }
     }
 
+    public static void w4it(){
+        w4it(3000);
+    }
+
     /*****
      * 
      * FONCTION à venirprint
@@ -25,4 +31,8 @@ public class Debug {
         System.out.println(msg);
     }
     
+
+    public static void getAllHandles(WebDriver driver){
+        driver.getWindowHandles().forEach((h) -> print(h));
+    }
 }
