@@ -8,4 +8,18 @@ public class PageListeCalendrier extends Page{
         return null;
     }
 
+    /*
+    * TODO
+    */
+    public PageCalendrierCreation creerDerive(WebDriver driver) {
+        return null;
+    }
+
+    public void clickMoins() {
+    }
+
+    public PageCalendrierCreation clickCreerCopie() {
+        return null;
+    }
+
 }

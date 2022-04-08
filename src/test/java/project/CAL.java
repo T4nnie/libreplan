@@ -54,9 +54,18 @@ public class CAL {
         assert (pa.aCalendrier());
         PageListeCalendrier plc = pa.selectionnerRessources_Calendrier(driver);
         PageCalendrierCreation pcc = plc.clickCreer(driver);
-
-
-        
+        pcc.remplirCalendrier();
+        plc = pcc.clickEnregistrerCalendrier(driver);
+        pcc = plc.creerDerive(driver);
+        pcc.remplirCalendrier();
+        pcc.clickEnregistrerContinuerCalendrier(driver);
+        pcc.remplirCalendrier();
+        plc = pcc.annuler();
+        plc.clickMoins();
+        pcc = plc.clickCreerCopie();
+        pcc.clickEnregistrerContinuerCalendrier(driver);
+        pcc.remplirCalendrier();
+        plc = pcc.clickEnregistrerCalendrier(driver);
 
     }
 
