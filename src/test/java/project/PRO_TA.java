@@ -48,7 +48,14 @@ public class PRO_TA {
     }
 
     @Test
-    public void CAL_01(){
+    public void PROTA_01(){
+        PageLogin pl = PageFactory.initElements(driver, PageLogin.class);   
+
+
+    }
+
+    @Test
+    public void PROTA_04(){
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);   
 
 
