@@ -20,4 +20,21 @@ public class PageAccueil extends Page {
         return null;
     }
 
+    /*
+    *TODO
+    *Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Machines".
+    */
+    public PageMachines selectionnerRessources_Machines(WebDriver driver) {
+        return null;
+    }
+
+
+    /*
+    *TODO
+    *Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Participants".
+    */
+    public PageParticipants selectionnerRessources_Participants(WebDriver driver) {
+        return null;
+    }
+
 }
