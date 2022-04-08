@@ -52,8 +52,8 @@ public class CAL {
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
         PageAccueil pa = pl.seConnecter(driver, "log", "mdp");
         assert (pa.aCalendrier());
-        PageCalendrier pc = pa.selectionnerRessources_Calendrier(driver);
-        
+        PageListeCalendrier plc = pa.selectionnerRessources_Calendrier(driver);
+        PageCalendrierCreation pcc = plc.clickCreer(driver);
 
 
         

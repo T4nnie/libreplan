@@ -16,7 +16,7 @@ public class PageAccueil extends Page {
     *TODO
     *Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Calendriers".
     */
-    public PageCalendrier selectionnerRessources_Calendrier(WebDriver driver) {
+    public PageListeCalendrier selectionnerRessources_Calendrier(WebDriver driver) {
         return null;
     }
 
