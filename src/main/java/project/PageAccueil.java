@@ -11,11 +11,21 @@ import project.Outils.Debug;
 public class PageAccueil extends Page {
 
 
-    /*
-    * TODO
-    */
+    
+    @FindBy(xpath = "//title")
+    private WebElement titre_page;
+    
     public boolean aCalendrier() {
-        return false;
+        System.out.println("text content " + titre_page.getAttribute("textContent"));
+        
+
+        if(titre_page.getAttribute("textContent").equals("LibrePlan: Calendrier")){
+            return true;
+        }else{
+            return false;
+        }
+        
+        
     }
 
     @FindBy(xpath = "//tr[@valign='bottom']/td[2]")

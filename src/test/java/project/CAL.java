@@ -50,22 +50,70 @@ public class CAL {
     @Test
     public void CAL_01(){
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
-        PageAccueil pa = pl.seConnecter(driver, "log", "mdp");
-        assert (pa.aCalendrier());
+        PageAccueil pa = pl.seConnecter(driver, "admin", "admin");
+        Debug.w4it(1000);
+        assertTrue(pa.aCalendrier());
+        Debug.w4it(1000);
         PageListeCalendrier plc = pa.selectionnerRessources_Calendrier(driver);
+        Debug.w4it(1000);
+        assertTrue("On est sur la PageListeCalendrier", plc.aListeCalendrier());
+        //check tableau et données à faire
+        //check bouton creer à faire
+        Debug.w4it(1000);
         PageCalendrierCreation pcc = plc.clickCreer(driver);
-        pcc.remplirCalendrier();
+        Debug.w4it(1000);
+        assertTrue(pcc.aCreerCalendrier());
+        //check formulaire à faire
+        //check boutons enregistrer, enregistrer et continuer, annuler à faire
+        pcc.remplirCalendrier("Calendrier - Test 1");
         plc = pcc.clickEnregistrerCalendrier(driver);
+        Debug.w4it(1000);
+        assertTrue(plc.aListeCalendrier());
+        //check "Calendrier - Test 1" est présent
+        Debug.w4it(1000);
         pcc = plc.creerDerive(driver);
-        pcc.remplirCalendrier();
-        pcc.clickEnregistrerContinuerCalendrier(driver);
-        pcc.remplirCalendrier();
-        plc = pcc.annuler();
+        Debug.w4it(1000);
+        assertTrue(pcc.aCreerCalendrier());
+        //check champs remplis à faire
+        pcc.remplirCalendrier("Calendrier - Test 1");
+        pcc.clickEnregistrerContinuerCalendrier();
+        //check message à faire
+        pcc.remplirCalendrier("Calendrier - Test Calendrier Dérivé");
+        pcc.clickEnregistrerContinuerCalendrier();
+        //check message à faire
+        //check titre page a faire
+        plc = pcc.annuler(driver);
+        //assertTrue(plc.aListeCalendrier());
         plc.clickMoins();
-        pcc = plc.clickCreerCopie();
-        pcc.clickEnregistrerContinuerCalendrier(driver);
-        pcc.remplirCalendrier();
+        //check arborescence à faire
+        pcc = plc.clickCreerCopie(driver);
+        //assertTrue(pcc.aCreerCalendrier());
+        pcc.clickEnregistrerContinuerCalendrier();
+        //check message à faire
+        pcc.remplirCalendrier("Calendrier - Test 2");
         plc = pcc.clickEnregistrerCalendrier(driver);
+        Debug.w4it(1000);
+        assertTrue(plc.aListeCalendrier());
+        //check message
+        //check présence calendrier
+
+    }
+
+    @Test
+    public void CAL_02(){
+        PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
+        PageAccueil pa = pl.seConnecter(driver, "admin", "admin");       
+        Debug.w4it(1000); 
+        assertTrue(pa.aCalendrier());
+        Debug.w4it(1000);
+        PageParticipants pp = pa.selectionnerRessources_Participants(driver);
+        Debug.w4it(1000);
+        assertTrue("On est sur la page liste des participants", pp.aParticipants());
+        //check tableau et données à faire
+        //check boutons et couleurs des boutons à faire
+        PageModifierParticipant pmp = pp.clickParticipant(driver);
+        assertTrue("On est sur la page 'Modifier le participant'", pmp.aModifierParticipant());
+
 
     }
 
