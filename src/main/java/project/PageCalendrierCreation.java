@@ -19,6 +19,21 @@ public class PageCalendrierCreation extends Page {
          }
          
      }
+
+
+     //Vérifie qu'on est sur la page creer calendrier test 1
+     @FindBy(xpath = "//td[@class= 'z-caption-l']")
+     private WebElement titre_page_creer_calendrier_test1;
+ 
+     public boolean aCreerCalendrierTest1() {
+         if(titre_page_creer_calendrier_test1.getAttribute("textContent") .equals("Créer Calendrier: Calendrier - Test 1")){
+             return true;
+         }else{
+             return false;
+         }
+         
+     }
+
      
     //Remplit un calendrier à sa création
     @FindBy(xpath = "(//input)[1]")

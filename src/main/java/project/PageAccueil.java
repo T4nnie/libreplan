@@ -11,7 +11,7 @@ import project.Outils.Debug;
 public class PageAccueil extends Page {
 
 
-    
+    //Vérifie qu'on est sur la page d'accueil
     @FindBy(xpath = "//title")
     private WebElement titre_page;
     
