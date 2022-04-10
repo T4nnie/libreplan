@@ -1,10 +1,14 @@
 package project;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import project.Outils.Debug;
 
@@ -38,7 +42,7 @@ public class PageAccueil extends Page {
     private WebElement l_calendrier;
 
     public PageListeCalendrier selectionnerRessources_Calendrier(WebDriver driver) {
-       moneOnAndSelectA(driver, o_ressources, l_calendrier);
+       moneOnRessourcesSelectA(driver, o_ressources, l_calendrier);
         return PageFactory.initElements(driver, PageListeCalendrier.class);
     }
 
@@ -48,7 +52,7 @@ public class PageAccueil extends Page {
     @FindBy(xpath = "//a[@href='/libreplan/resources/machine/machines.zul']")
     private WebElement l_machines;
     public PageMachines selectionnerRessources_Machines(WebDriver driver) {
-        moneOnAndSelectA(driver, o_ressources, l_machines);
+        moneOnRessourcesSelectA(driver, o_ressources, l_machines);
         return PageFactory.initElements(driver, PageMachines.class);
     }
 
@@ -59,15 +63,17 @@ public class PageAccueil extends Page {
     @FindBy(xpath = "//a[@href='/libreplan/resources/worker/worker.zul']")
     private WebElement l_participants;
     public PageParticipants selectionnerRessources_Participants(WebDriver driver) {
-        moneOnAndSelectA(driver, o_ressources, l_participants);
+        moneOnRessourcesSelectA(driver, o_ressources, l_participants);
         return PageFactory.initElements(driver, PageParticipants.class);
     }
 
     /*
     * Passer la souris sur un onglet *on* et selectionner un label *a*
     */
-    private void moneOnAndSelectA(WebDriver driver, WebElement on, WebElement a){
+    private void moneOnRessourcesSelectA(WebDriver driver, WebElement on, WebElement a){
         Actions actions = new Actions(driver);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        on = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[@valign='bottom']/td[2]")));
         actions.moveToElement(on).moveToElement(a).click().build().perform();
 
     }
