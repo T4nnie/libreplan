@@ -50,20 +50,25 @@ public class GRE {
     @Test
     public void GRE_02(){
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
-        PageAccueil pa = pl.seConnecter(driver, "log", "mdp");
+        PageAccueil pa = pl.seConnecter(driver, "admin", "admin");
+        Debug.w4it(2000);
         assert(pa.aCalendrier());
+        Debug.w4it(1000);
         PageMachines pm = pa.selectionnerRessources_Machines(driver);
-        assert(pm.isMe());
-        PageMachineCreation pmc = pm.clickCreer(driver);
+        Debug.w4it(1000);
+        assertTrue("Affichage de la Page Machines Liste", pm.aMachines());
 
+
+        
+        
     }
 
-    @Test
+    //@Test
     public void GRE_01(){
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
-        PageAccueil pa = pl.seConnecter(driver, "log", "mdp");
+        PageAccueil pa = pl.seConnecter(driver, "admin", "admin");
         assert(pa.aCalendrier());
-        PageParticipants pp = pa.selectionnerRessources_Participants(driver);
+       
     }
 
 

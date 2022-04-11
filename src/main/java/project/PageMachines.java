@@ -68,7 +68,12 @@ public class PageMachines extends Page {
     }
 
     //STEP 3 - Créer une machine - Accès au formulaire de création
-
+    @FindBy(xpath = "(//td[@class='z-button-cm' and text()='Créer'])[1]")
+    private WebElement b_Creer;
+    public PageMachineCreation clickCreer(WebDriver driver){
+        b_Creer.click();
+        return PageFactory.initElements(driver, PageMachineCreation.class);
+    }
 
     //STEP 4 - Créer une machine - Conformité de l'onglet "Données de la machine"
     
