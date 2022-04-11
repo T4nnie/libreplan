@@ -64,9 +64,73 @@ public class PageModifierParticipant {
     @FindBy(xpath = "(//div[@class='z-row-cnt z-overflow-hidden']/input[@class='z-textbox'])[1]")
 	private WebElement c_prenom;
 
-    //Vérifie que le champ "Nom" est bien rempli
+    //Vérifie que le champ "Prénom" est bien rempli
     public boolean aCPrenomRempli(){
         if(c_prenom.getAttribute("textContent").equals("Jean")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    //Vérifie que l'onglet Calendrier est sélectionné
+    @FindBy(xpath = "(//div[@class = 'z-tabs-header'])[1]/ul/li[5]")
+	private WebElement o_calendrier2;
+
+    public boolean aOCalSelect(){
+        if(o_calendrier2.getAttribute("class").equals("z-tab z-tab-seld")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Vérifie que l'option de calendrier Default est sélectionné
+    @FindBy(xpath = "(//input[@class='z-combobox-inp'])[1]")
+	private WebElement opt_calendrier_defaut;
+
+    public boolean aOptCalDefaut(){
+        if(o_calendrier2.getAttribute("value").equals("Default")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Vérifie que le message "Participant enregistré" s'affiche
+    @FindBy(xpath = "//div[@class='message_INFO']/span[@class='z-label']")
+	private WebElement m_participant_enregistre;
+
+    public boolean aMParticipantEnregistre(){
+        if(m_participant_enregistre.getAttribute("textContent").equals("Participant enregistré")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Vérifie que l'onglet Données personnelles est sélectionné
+    @FindBy(xpath = "(//div[@class = 'z-tabs-header'])[1]/ul/li[1]")
+	private WebElement o_données_personnelles;
+
+    public boolean aODonnéesPersoSelect(){
+        if(o_données_personnelles.getAttribute("class").equals("z-tab z-tab-seld")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+
+    //Vérifie que le texte "Dérivé du calendrier Calendrier - Test 1" est affiché
+    @FindBy(xpath = "(//tbody/tr/td/span[@class = 'z-label'])[8]")
+	private WebElement type_calendrier;
+
+    public boolean aTypeCalendrier(){
+        if(type_calendrier.getAttribute("textContent").equals("Dérivé du calendrier Calendrier - Test 1")){
             return true;
         }else{
             return false;

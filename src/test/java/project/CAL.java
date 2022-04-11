@@ -102,7 +102,7 @@ public class CAL {
         Debug.w4it(1000);
         assertTrue(plc.aListeCalendrier());
         plc.aMCalEnregistre2();
-        // //check présence calendrier facultatif
+        //check présence calendrier facultatif
 
     }
 
@@ -122,17 +122,20 @@ public class CAL {
         PageModifierParticipant pmp = pp.clickParticipant(driver); //step 3
         Debug.w4it(2000);
         //assertTrue("On est sur la page 'Modifier le participant'", pmp.aModifierParticipant()); // !! TEXTE HANTÉ !! check en fonction du nom du participant à faire
-        //check prénom et nom participant à faire
+        pmp.aCPrenomRempli();
+        //check nom participant facultatif
         pmp.clickCalendrier(); //step 4
-        //check des elements de l'onglet à faire
+        pmp.aOCalSelect();
         pmp.clickSupprimerCalendrier(); //step 5
-        //check element page
+        pmp.aOptCalDefaut();
         Debug.w4it(2000);
         pmp.selectionnerPremierCalendrierParent(); //step 6
         pmp.clickSauverEtContinuer();
-        //check onglet "Données personnelles" affiché et message à faire
+        Debug.w4it(2000);
+        pmp.aMParticipantEnregistre();
+        pmp.aODonnéesPersoSelect();
         pmp.clickCalendrier(); //step 7
-        //check valeur affichée dans le champ type à faire
+        pmp.aTypeCalendrier();
     }
 
 
