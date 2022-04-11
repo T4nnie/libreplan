@@ -36,9 +36,11 @@ public class PRO_TA {
         //System.setProperty("webdriver.chrome.driver","src/main/resources/drivers/chromedriver.exe");
         System.setProperty("webdriver.gecko.driver","src/main/resources/drivers/geckodriver.exe");
         driver = new FirefoxDriver();
+        identifiant = new Properties();
+        DATA  = new Properties();
         try{
-        identifiant.load(new FileInputStream("src/main/resources/identifiant.properties"));       
-        DATA.load(new FileInputStream("src/main/resources/PRO_TA.properties"));
+        identifiant.load(new FileInputStream("src/main/resources/JDD/identifiant.properties"));       
+        DATA.load(new FileInputStream("src/main/resources/JDD/PRO_TA.properties"));
         }catch(IOException e){
             e.printStackTrace();
         }       
@@ -67,7 +69,7 @@ public class PRO_TA {
         PageAccueil pa = pl.seConnecter(driver, identifiant.getProperty("nomUtilisateur"),identifiant.getProperty("motDePasse"));
         PageCreationProjet fc = pa.clickCreerProjet(driver);
         //assert(pa.isMe());
-        fc.remplirFormulaire(DATA.getProperty("nvProjet_nom"), DATA.getProperty("nvProjet_code"), "Date", "dateEcheance");
+        fc.remplirFormulaire(DATA.getProperty("nvProjet_nom"), DATA.getProperty("nvProjet_code"), "11/04/2022", "22/04/2022");
     
 
     }

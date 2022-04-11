@@ -16,8 +16,7 @@ public class PageCalendrierCreation extends Page {
              return true;
          }else{
              return false;
-         }
-         
+         }         
      }
 
 
@@ -30,9 +29,83 @@ public class PageCalendrierCreation extends Page {
              return true;
          }else{
              return false;
-         }
-         
+         }         
      }
+
+
+     //Vérifie la présence de l'onglet "Données de calendrier"
+    @FindBy(xpath = "//span[@class='z-tab-text' and contains(., 'Données de calendrier')]")
+    private WebElement o_donnees_de_calendrier;
+    
+    public boolean aODonnesCalendrier(){
+        if(o_donnees_de_calendrier.isDisplayed()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Vérifie la présence du Calendrier qui vient d'être créé "Calendrier - Test 1"
+    @FindBy(xpath = "(//div[@class='z-treecell-cnt z-overflow-hidden']/span[@class='z-label'])[1]")
+	private WebElement e_calendrier_test_1;
+
+    public boolean aElemCalTest1(){
+        if(e_calendrier_test_1.getAttribute("textContent").equals("Calendrier - Test 1")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Vérifie que le champ "Nom" est bien vide
+    @FindBy(xpath = "(//input)[1]")
+	private WebElement c_nom;
+
+    public boolean aCNomVide(){
+        if(c_nom.getAttribute("textContent").equals("")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Vérifie que le champ "Nom" est bien rempli
+    public boolean aCNomRempli(){
+        if(c_nom.getAttribute("textContent").equals("Calendrier - Test 1")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+
+    //Vérifie que le message "Calendrier - Test 1 existe déjà" s'affiche
+    @FindBy(xpath = "//div[@class='message_WARNING']")
+	private WebElement m_existe_deja;
+
+    public boolean aExisteDeja(){
+        if(m_existe_deja.isDisplayed()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Vérifie que le message "Calendrier de base "Calendrier - Test Calendrier Dérivé" enregistré" s'affiche
+    @FindBy(xpath = "//div[@class='message_INFO']/span[@class='z-label']")
+	private WebElement m_cal_enregistre;
+
+    public boolean aMCalEnregistre(){
+        if(m_cal_enregistre.getAttribute("textContent").equals("Calendrier de base \"Calendrier - Test Calendrier Dérivé\" enregistré")){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
      
     //Remplit un calendrier à sa création
