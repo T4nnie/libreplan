@@ -9,53 +9,74 @@ public class PageMachines extends Page {
     @FindBy(xpath = "//a[@href='/libreplan/resources/machine/machines.zul']")
     private WebElement s_Machine;
 
-    //Xpath de la colonne Nom
-    @FindBy(xpath = "//*[@id='pOCQs5-cave'][text()='Nom']")
+
+    //Affichage éléments du tableau
+    @FindBy(xpath = "(//div[@class='z-column-cnt' and contains(., 'Nom')])[1]")
     private WebElement col_Machine;
-
-    //Xpath de la colonne Description
-    @FindBy(xpath = "//*[@id='pOCQt5-cave'][text()='Description']")
-    private WebElement col_Desc;
-
-    //Xpath de la colonne Code
-    @FindBy(xpath = "//*[@id='pOCQu5-cave'][text()='Code']")
+    @FindBy(xpath = "(//div[@class='z-column-cnt' and contains(., 'Description')])[1]")
+    private WebElement col_Description;
+    @FindBy(xpath = "(//div[@class='z-column-cnt' and contains(., 'Code')])[1]")
     private WebElement col_Code;
-
-    //Xpath de la colonne En file
-    @FindBy(xpath = "//*[@id='pOCQv5-cave'][text()='En file']")
+    @FindBy(xpath = "(//div[@class='z-column-cnt' and contains(., 'En file')])[1]")
     private WebElement col_EnFile;
-
-    //Xpath de la colonne Opérations
-    @FindBy(xpath = "//*[@id='pOCQw5-cave'][text()='Opérations']")
+    @FindBy(xpath = "(//div[@class='z-column-cnt' and contains(., 'Opérations')])[1]")
     private WebElement col_Operations;
 
+
     //Xpath du champ de recherche "Filtré par" (champ de saisie + icône représentant une loupe)
-    @FindBy(xpath = "//*[@id='pOCQq4-real'][@class='z-bandbox-inp']")
+    @FindBy(xpath = "//input[@class='z-bandbox-inp']")
     private WebElement c_SaisieFiltre;
 
-    @FindBy(xpath = "//*[@id='pOCQq4-btn'][@class='z-bandbox-btn']")
+    @FindBy(xpath = "//i[@class='z-bandbox-btn']")
     private WebElement b_SaisieFiltre;
     
     //Xpath du champ "Détails personnels"
-    @FindBy(xpath = "//input[@id='pOCQd5']")
+    @FindBy(xpath = "(//input[@class='z-textbox'])[1]")
+    //span[@class="z-label" and contains(., 'Détails personnels')] 
     private WebElement c_DetailsPerso;
 
     //Xpath du bouton bleu clair [Plus d'options]
-    @FindBy(xpath = "//*[@id='pOCQf5-cnt'][contains(., 'options')]")
+    @FindBy(xpath = "//td[@class='z-caption-l' and contains(.,'options')]")
     private WebElement b_PlusOptions;
 
     //Xpath du bouton [Filtre]
-    //*[@id="pOCQn5-box"]/tbody/tr[2]/td[@class="z-button-cm"]
-    @FindBy(xpath = "//*[@id='pOCQn5-box']/tbody/tr[2]/td[contains(., 'Filtre')]")
+    @FindBy(xpath = "//td[@class='z-button-cm' and contains(.,'Filtre')]")
     private WebElement b_Filtre;
 
     //Xpath du bouton [Créer]
-    @FindBy(xpath = "//*[@id='lSGQx5-box']/tbody/tr[2]/td[contains(., 'Créer')]")
+    @FindBy(xpath = "(//td[@class='z-button-cm' and text()='Créer'])[1]")
     private WebElement b_Creer;
 
 
 
+    /* ---------------------*/
+    /*       METHODES
+    /* ---------------------*/
 
-    //Methodes
+    //STEP 1 - Connexion à l'application - Profil Admin OK
 
+    //STEP 2 - Accéder à la page de gestion des machines
+
+    @FindBy(xpath = "//title")
+    private WebElement titre_page;
+    public boolean aMachines(){
+        if(titre_page.getAttribute("textContent").equals("LibrePlan: Machines")){
+            return true;
+        }else{
+            return false;
+        }    
+    }
+
+    //STEP 3 - Créer une machine - Accès au formulaire de création
+
+
+    //STEP 4 - Créer une machine - Conformité de l'onglet "Données de la machine"
+    
+    
+    //STEP 5- Créer une machine - Bouton [Sauver et continuer]
+    
+    
+    //STEP 6 - Retour page de gestion des machines
 }
+
+
