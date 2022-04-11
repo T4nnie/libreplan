@@ -45,6 +45,7 @@ public class PageParticipants extends Page{
 	@FindBy(xpath = "//div[@class='z-column-cnt' and contains(.,'En file')]")
 	private WebElement col_enFile;
 	@FindBy(xpath = "//div[@class='z-column-cnt' and contains(.,'Opérations')]")
+
 	private WebElement col_operations;  
 
     //Affichage du champ de saisie "Filtré par"
@@ -65,7 +66,7 @@ public class PageParticipants extends Page{
 	private WebElement b_plus_doptions;
     //Affichage du bouton [Filtre]
     @FindBy(xpath = "//td[@class='z-button-cm' and contains(.,'Filtre')]")
-	private WebElement b_filtres;
+	private WebElement b_filtre;
     //Affichage du bouton [Créer]
     @FindBy(xpath = "//div/span/table/tbody/tr/td[text()='Créer']")
 	private WebElement b_creer;
