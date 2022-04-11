@@ -19,6 +19,7 @@ public class PageListeCalendrier extends Page{
         }
     }
 
+
     //Créer un calendrier et retourne la PageCalendrierCreation
     @FindBy(xpath = "(//td[@class='z-button-cm'])[6]")
     private WebElement b_creerCalendrier;
@@ -28,9 +29,7 @@ public class PageListeCalendrier extends Page{
         return PageFactory.initElements(driver, PageCalendrierCreation.class);
     }
 
-    /*
-    * TODO
-    */
+
     //Click sur l'icone "Créer une dérive" dans la colonne "Opération" et renvoie la PageCalendrierCreation
     @FindBy(xpath = "(//img[@src = '/libreplan/common/img/ico_derived1.png'])[1]")
     private WebElement b_creerDervie;
@@ -57,5 +56,71 @@ public class PageListeCalendrier extends Page{
         b_creerCopie.click();
         return PageFactory.initElements(driver, PageCalendrierCreation.class);
     }
+    
 
+    //Vérifie la présence de la colonne "Nom"
+    @FindBy(xpath = "//div[@class='z-treecol-cnt' and contains(.,'Nom')]")
+    private WebElement col_nom;
+
+    public boolean aColNom(){
+        if(col_nom.isDisplayed()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    //Vérifie la présence du bouton "Créer"
+    @FindBy(xpath = "//div/span/table/tbody/tr/td[text()='Créer']")
+	private WebElement b_creer;
+
+    public boolean aBCreer(){
+        if(b_creer.isDisplayed()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
+    //Vérifie la présence du calendrier dérivé
+    @FindBy(xpath = "//span[text()='Calendrier - Test 1Calendrier - Test Calendrier Dérivé']")
+	private WebElement calendrier_derive;
+
+    public boolean aCalendrierDerive(){
+        if(calendrier_derive.isDisplayed()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    //Vérifie que le calendrier dérivé est bien caché
+    public boolean aPasCalendrierDerive(){
+        if(calendrier_derive.isDisplayed()){
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+    
+
+    //Vérifie que le message "Calendrier de base "Calendrier - Test 2" enregistré" s'affiche
+    @FindBy(xpath = "//div[@class='message_INFO']/span[@class='z-label']")
+	private WebElement m_cal_enregistre;
+
+    public boolean aMCalEnregistre2(){
+        if(m_cal_enregistre.getAttribute("textContent").equals("Calendrier de base \"Calendrier - Test 2\" enregistré")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    
+    
 }

@@ -58,5 +58,19 @@ public class PageModifierParticipant {
     public void clickSauverEtContinuer() {
         b_sauver_et_continuer.click();
     }
+
+
+    //Affichage du champ "Prénom"
+    @FindBy(xpath = "(//div[@class='z-row-cnt z-overflow-hidden']/input[@class='z-textbox'])[1]")
+	private WebElement c_prenom;
+
+    //Vérifie que le champ "Nom" est bien rempli
+    public boolean aCPrenomRempli(){
+        if(c_prenom.getAttribute("textContent").equals("Jean")){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
 }
