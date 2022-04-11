@@ -73,9 +73,20 @@ public class PageAccueil extends Page {
     private void moneOnRessourcesSelectA(WebDriver driver, WebElement on, WebElement a){
         Actions actions = new Actions(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        on = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[@valign='bottom']/td[2]")));
+        o_ressources = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[@valign='bottom']/td[2]")));
         actions.moveToElement(on).moveToElement(a).click().build().perform();
 
+    }
+
+    @FindBy(xpath="//span[@title='Créer un nouveau projet']//img")
+    WebElement b_creerProjet;
+
+    public PageCreationProjet clickCreerProjet(WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        Actions actions = new Actions(driver);
+        wait.until(ExpectedConditions.visibilityOf(b_creerProjet));
+        actions.moveToElement(b_creerProjet).click().build().perform();
+        return PageFactory.initElements(driver, PageCreationProjet.class);
     }
 
 }

@@ -50,7 +50,11 @@ public class PRO_TA {
     @Test
     public void PROTA_01(){
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);   
-
+        PageAccueil pa = pl.seConnecter(driver, "admin ", "admin");
+        PageCreationProjet fc = pa.clickCreerProjet(driver);
+        //assert(pa.isMe());
+        Debug.getAllHandles(driver);
+    
 
     }
 
