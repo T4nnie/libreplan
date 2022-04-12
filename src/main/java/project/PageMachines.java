@@ -1,7 +1,9 @@
 package project;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class PageMachines extends Page {
 
@@ -68,19 +70,14 @@ public class PageMachines extends Page {
     }
 
     //STEP 3 - Créer une machine - Accès au formulaire de création
-    @FindBy(xpath = "(//td[@class='z-button-cm' and text()='Créer'])[1]")
-    private WebElement b_Creer;
-    public PageMachineCreation clickCreer(WebDriver driver){
+    public PageMachineCreation clickCreerMachine(WebDriver driver){
         b_Creer.click();
         return PageFactory.initElements(driver, PageMachineCreation.class);
     }
 
+    //Switch : PageMachineCreation
     //STEP 4 - Créer une machine - Conformité de l'onglet "Données de la machine"
-    
-    
     //STEP 5- Créer une machine - Bouton [Sauver et continuer]
-    
-    
     //STEP 6 - Retour page de gestion des machines
 }
 

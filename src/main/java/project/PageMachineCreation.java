@@ -6,14 +6,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class PageMachineCreation {
     
-    /*
-    *TODO
-    *Accéder à la page de gestion des machines :
-    *Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Machines".
-    */
-
-    //[Pas de test 4] Créer une machine - Vérifier la conformité de l'onglet "Données de la machine"
-    
     //Affichage des onglets de la création de la machine
 	@FindBy(xpath = "//li[@class='z-tab z-tab-seld']//span[text()='Donnée de la machine']")
 	public WebElement ongletDonneeMachine;
@@ -38,8 +30,7 @@ public class PageMachineCreation {
 	public WebElement b_sauverEtContinuer;
 	@FindBy(xpath = "(//td[@class='z-button-cm' and text()='Annuler'])[2]")
 	public WebElement b_annuler;
-	
-    //FIN [/Pas de test 4]
+
 
     //Elements/Liste Page confirmation création Machine
     //Supprimer Modifier Machine
@@ -47,16 +38,24 @@ public class PageMachineCreation {
 	public WebElement b_supprimerMachine;
     @FindBy(xpath = "(//img[@src='/libreplan/common/img/ico_editar1.png'])[1]")
 	public WebElement b_modifierMachine;
-	//Suppression - confirmation suppression
+	//Modal Suppression - confirmation suppression
     @FindBy(xpath = "//td[@class='z-button-cm' and text()='OK']")
 	public WebElement b_okSupprimer;
-    //Suppression - annuler suppression
+    //Modal Suppression - annuler suppression
     @FindBy(xpath = "(//td[@class='z-button-cm' and text()='Annuler'])[3]")
 	public WebElement b_koSupprimer;
 
     /* ---------------------*/
     /*       METHODES
     /* ---------------------*/
+
+    /*
+    *Accéder à la page de gestion des machines :
+    *Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Machines".
+    */
+
+    //TODO : HOVER / MOVE TO ELEMENT
+
     @FindBy(xpath = "//title")
     private WebElement titre_page;
     public boolean aMachines(){
@@ -72,6 +71,13 @@ public class PageMachineCreation {
     *Vérifier la conformité de l'onglet "Données de la machine".
     */
 
+    public boolean aOngletDonneeMachine(){
+        if(ongletDonneeMachine.isDisplayed()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     /*
     *Créer une machine - Bouton [Sauver et continuer] :
@@ -92,11 +98,11 @@ public class PageMachineCreation {
     //Remplir les champs
     public void remplirMachine(String codeMachine, String nomMachine, String descMachine){
         c_nom.clear();
-        c_nom.sendKeys("MACHINETEST1");
+        c_nom.sendKeys(nomMachine);
         c_code.clear();
-        c_code.sendKeys("MACHINETEST1");
+        c_code.sendKeys(codeMachine);
         c_description.clear();
-        c_description.sendKeys("MACHINETEST1");
+        c_description.sendKeys(descMachine);
     }
 
     //Cliquer sur le bouton [Sauver et continuer]
