@@ -1,11 +1,17 @@
 package project;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class PageListeCalendrier extends Page{
+
+    public static Properties DATA;
 
     //Vérifie qu'on est sur la page des listes de calendriers
     @FindBy(xpath = "//title")
@@ -86,7 +92,7 @@ public class PageListeCalendrier extends Page{
 
 
     //Vérifie la présence du calendrier dérivé
-    @FindBy(xpath = "//span[text()='Calendrier - Test 1Calendrier - Test Calendrier Dérivé']")
+    @FindBy(xpath = "//span[text()='Calendrier - Test 1Calendrier - Test Calendrier Derive']")
 	private WebElement calendrier_derive;
 
     public boolean aCalendrierDerive(){
@@ -114,13 +120,40 @@ public class PageListeCalendrier extends Page{
 	private WebElement m_cal_enregistre;
 
     public boolean aMCalEnregistre2(){
-        if(m_cal_enregistre.getAttribute("textContent").equals("Calendrier de base \"Calendrier - Test 2\" enregistré")){
+        DATA  = new Properties();
+        try{                   
+            DATA.load(new FileInputStream("src/main/resources/JDD/CAL.properties"));
+            }catch(IOException e){
+                e.printStackTrace();
+            } 
+            System.out.println(DATA.getProperty("nomCalendrier1")+DATA.getProperty("nomCalendrier2")+" enregistré");
+        if(m_cal_enregistre.getAttribute("textContent").equals("Calendrier de base \""+DATA.getProperty("nomCalendrier1")+DATA.getProperty("nomCalendrier2")+"\" enregistré")){
+            //"Calendrier de base \"Calendrier - Test 1Calendrier - Test 2\" enregistré"
+            //"Calendrier de base \""+DATA.getProperty("nomCalendrier1")+DATA.getProperty("nomCalendrier2")+"\" enregistré")
             return true;
         }else{
             return false;
         }
     }
     
+
+    //Vérifie la présence du Calendrier qui vient d'être créé "Calendrier - Test 1"
+    @FindBy(xpath = "(//div[@class='z-treecell-cnt z-overflow-hidden']/span[@class='z-label'])[1]")
+	private WebElement e_calendrier_test_1;
+
+    public boolean aElemCalTest1(){
+        DATA  = new Properties();
+        try{                   
+            DATA.load(new FileInputStream("src/main/resources/JDD/CAL.properties"));
+            }catch(IOException e){
+                e.printStackTrace();
+            } 
+        if(e_calendrier_test_1.getAttribute("textContent").equals(DATA.getProperty("nomCalendrier1"))){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
     
 }

@@ -1,5 +1,9 @@
 package project;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,12 +11,16 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PageCalendrierCreation extends Page {
 
+    public static Properties DATA;
+
+    
+    
      //Vérifie qu'on est sur la page creer calendrier
      @FindBy(xpath = "//td[@class= 'z-caption-l']")
      private WebElement titre_page_creer_calendrier;
  
      public boolean aCreerCalendrier() {
-         if(titre_page_creer_calendrier.getAttribute("textContent") .equals("Créer Calendrier")){
+         if(titre_page_creer_calendrier.getAttribute("textContent").equals("Créer Calendrier")){
              return true;
          }else{
              return false;
@@ -25,7 +33,14 @@ public class PageCalendrierCreation extends Page {
      private WebElement titre_page_creer_calendrier_test1;
  
      public boolean aCreerCalendrierTest1() {
-         if(titre_page_creer_calendrier_test1.getAttribute("textContent") .equals("Créer Calendrier: Calendrier - Test 1")){
+        DATA  = new Properties();
+        try{                   
+            DATA.load(new FileInputStream("src/main/resources/JDD/CAL.properties"));
+            }catch(IOException e){
+                e.printStackTrace();
+            } 
+        System.out.println("Créer Calendrier: "+DATA.getProperty("nomCalendrier1"));
+         if(titre_page_creer_calendrier_test1.getAttribute("textContent").equals("Créer Calendrier: "+DATA.getProperty("nomCalendrier1"))){
              return true;
          }else{
              return false;
@@ -46,17 +61,7 @@ public class PageCalendrierCreation extends Page {
     }
 
 
-    //Vérifie la présence du Calendrier qui vient d'être créé "Calendrier - Test 1"
-    @FindBy(xpath = "(//div[@class='z-treecell-cnt z-overflow-hidden']/span[@class='z-label'])[1]")
-	private WebElement e_calendrier_test_1;
-
-    public boolean aElemCalTest1(){
-        if(e_calendrier_test_1.getAttribute("textContent").equals("Calendrier - Test 1")){
-            return true;
-        }else{
-            return false;
-        }
-    }
+    
 
 
     //Vérifie que le champ "Nom" est bien vide
@@ -74,7 +79,13 @@ public class PageCalendrierCreation extends Page {
 
     //Vérifie que le champ "Nom" est bien rempli
     public boolean aCNomRempli(){
-        if(c_nom.getAttribute("textContent").equals("Calendrier - Test 1")){
+        DATA  = new Properties();
+        try{                   
+            DATA.load(new FileInputStream("src/main/resources/JDD/CAL.properties"));
+            }catch(IOException e){
+                e.printStackTrace();
+            } 
+        if(c_nom.getAttribute("textContent").equals(DATA.getProperty("nomCalendrier1"))){
             return true;
         }else{
             return false;
@@ -100,7 +111,13 @@ public class PageCalendrierCreation extends Page {
 	private WebElement m_cal_enregistre;
 
     public boolean aMCalEnregistre(){
-        if(m_cal_enregistre.getAttribute("textContent").equals("Calendrier de base \"Calendrier - Test Calendrier Dérivé\" enregistré")){
+        DATA  = new Properties();
+        try{                   
+            DATA.load(new FileInputStream("src/main/resources/JDD/CAL.properties"));
+            }catch(IOException e){
+                e.printStackTrace();
+            } 
+        if(m_cal_enregistre.getAttribute("textContent").equals("Calendrier de base \""+DATA.getProperty("nomCalendrierDerive")+"\" enregistré")){
             return true;
         }else{
             return false;

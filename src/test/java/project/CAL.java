@@ -2,6 +2,10 @@ package project;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,6 +23,9 @@ import project.Outils.Debug;
 public class CAL {
 
     public static WebDriver driver;
+    public static Properties identifiant;
+    public static Properties DATA;
+
 
     /* Debut de tout test de cette classe
     * Set le webdriver
@@ -27,7 +34,15 @@ public class CAL {
     public static void set(){
         //System.setProperty("webdriver.chrome.driver","src/main/resources/drivers/chromedriver.exe");
         System.setProperty("webdriver.gecko.driver","src/main/resources/drivers/geckodriver.exe");
-        driver = new FirefoxDriver();       
+        driver = new FirefoxDriver();    
+        identifiant = new Properties();
+        DATA  = new Properties();
+        try{
+        identifiant.load(new FileInputStream("src/main/resources/JDD/identifiant.properties"));       
+        DATA.load(new FileInputStream("src/main/resources/JDD/CAL.properties"));
+        }catch(IOException e){
+            e.printStackTrace();
+        }   
     }
     
     /* Debut de chaque test de cette class
@@ -50,7 +65,7 @@ public class CAL {
     @Test
     public void CAL_01(){
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
-        PageAccueil pa = pl.seConnecter(driver, "admin", "admin"); //step 1
+        PageAccueil pa = pl.seConnecter(driver, identifiant.getProperty("nomUtilisateur"),identifiant.getProperty("motDePasse")); //step 1
         Debug.w4it(2000);
         assertTrue(pa.aCalendrier());        
         PageListeCalendrier plc = pa.selectionnerRessources_Calendrier(driver); //step 2
@@ -65,22 +80,22 @@ public class CAL {
         assertTrue(pcc.aCreerCalendrier());
         pcc.aODonnesCalendrier();
         //éléments checkabes facultatifs
-        pcc.remplirCalendrier("Calendrier - Test 1");
+        pcc.remplirCalendrier(DATA.getProperty("nomCalendrier1"));
         plc = pcc.clickEnregistrerCalendrier(driver); //step 4
         Debug.w4it(1000);
         assertTrue(plc.aListeCalendrier());
         //check "Calendrier - Test 1" est présent
-        pcc.aElemCalTest1();
+        assertTrue(plc.aElemCalTest1());
         Debug.w4it(1000);
         pcc = plc.creerDerive(driver); //step 5
         Debug.w4it(1000);
         assertTrue(pcc.aCreerCalendrier());
         //check champs vide facultatif
         assertTrue("Le champ nom est vide", pcc.aCNomVide());
-        pcc.remplirCalendrier("Calendrier - Test 1"); //step 6
+        pcc.remplirCalendrier(DATA.getProperty("nomCalendrier1")); //step 6
         pcc.clickEnregistrerContinuerCalendrier();
-        pcc.aExisteDeja();
-        pcc.remplirCalendrier("Calendrier - Test Calendrier Dérivé");
+        assertTrue(pcc.aExisteDeja());
+        pcc.remplirCalendrier(DATA.getProperty("nomCalendrierDerive"));
         pcc.clickEnregistrerContinuerCalendrier(); //step 7
         pcc.aMCalEnregistre();
         //check titre page facultaatif
@@ -96,12 +111,12 @@ public class CAL {
         assertTrue(pcc.aCreerCalendrierTest1());
         pcc.aCNomRempli();
         pcc.clickEnregistrerContinuerCalendrier(); //step 11
-        pcc.aExisteDeja();
-        pcc.remplirCalendrier("Calendrier - Test 2");
+        assertTrue(pcc.aExisteDeja());
+        pcc.remplirCalendrier(DATA.getProperty("nomCalendrier2"));
         plc = pcc.clickEnregistrerCalendrier(driver); //step 12
         Debug.w4it(1000);
         assertTrue(plc.aListeCalendrier());
-        plc.aMCalEnregistre2();
+        assertTrue(plc.aMCalEnregistre2());
         //check présence calendrier facultatif
 
     }
@@ -109,7 +124,7 @@ public class CAL {
     @Test
     public void CAL_04(){
         PageLogin pl = PageFactory.initElements(driver, PageLogin.class);
-        PageAccueil pa = pl.seConnecter(driver, "admin", "admin"); //step 1
+        PageAccueil pa = pl.seConnecter(driver, identifiant.getProperty("nomUtilisateur"),identifiant.getProperty("motDePasse")); //step 1
         Debug.w4it(2000); 
         assertTrue(pa.aCalendrier());
         Debug.w4it(1000);
