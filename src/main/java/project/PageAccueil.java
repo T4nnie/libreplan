@@ -19,6 +19,11 @@ public class PageAccueil extends Page {
     @FindBy(xpath = "//title")
     private WebElement titre_page;
     
+    
+    /** 
+     * Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Calendriers".
+     * @return boolean
+     */
     public boolean aCalendrier() {
         System.out.println("text content " + titre_page.getAttribute("textContent"));
         
@@ -41,16 +46,28 @@ public class PageAccueil extends Page {
     @FindBy(xpath = "//a[@href='/libreplan/calendars/calendars.zul']")
     private WebElement l_calendrier;
 
+    
+    /** 
+     * Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Calendriers".
+     * @param driver
+     * @return PageListeCalendrier
+     */
     public PageListeCalendrier selectionnerRessources_Calendrier(WebDriver driver) {
        moneOnRessourcesSelectA(driver, o_ressources, l_calendrier);
         return PageFactory.initElements(driver, PageListeCalendrier.class);
     }
 
     /*
-    *Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Machines".
+    *.
     */
     @FindBy(xpath = "//a[@href='/libreplan/resources/machine/machines.zul']")
     private WebElement l_machines;
+    
+    /** 
+     * Passer la souris sur l'onglet "Ressources" puis dans le sous-menu qui s'affiche, cliquer sur l'item "Machines"
+     * @param driver
+     * @return PageMachines
+     */
     public PageMachines selectionnerRessources_Machines(WebDriver driver) {
         moneOnRessourcesSelectA(driver, o_ressources, l_machines);
         return PageFactory.initElements(driver, PageMachines.class);
@@ -62,11 +79,22 @@ public class PageAccueil extends Page {
     */
     @FindBy(xpath = "//a[@href='/libreplan/resources/worker/worker.zul']")
     private WebElement l_participants;
+    
+    /** 
+     * @param driver
+     * @return PageParticipants
+     */
     public PageParticipants selectionnerRessources_Participants(WebDriver driver) {
         moneOnRessourcesSelectA(driver, o_ressources, l_participants);
         return PageFactory.initElements(driver, PageParticipants.class);
     }
 
+    
+    /** 
+     * @param driver
+     * @param on
+     * @param a
+     */
     /*
     * Passer la souris sur un onglet *on* et selectionner un label *a*
     */
@@ -81,12 +109,19 @@ public class PageAccueil extends Page {
     @FindBy(xpath="//span[@title='Créer un nouveau projet']//img")
     WebElement b_creerProjet;
 
+    
+    /** 
+     * @param driver
+     * @return PageCreationProjet
+     */
     public PageCreationProjet clickCreerProjet(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         Actions actions = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOf(b_creerProjet));
         actions.moveToElement(b_creerProjet).click().build().perform();
-        return PageFactory.initElements(driver, PageCreationProjet.class);
+        Debug.w4it();
+        Debug.getAllHandles(driver);
+        return PageFactory.initElements(driver.switchTo().frame(0), PageCreationProjet.class);
     }
 
 }
